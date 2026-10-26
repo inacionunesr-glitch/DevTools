@@ -252,3 +252,147 @@ body {
     flex-direction: column;
   }
 }
+
+.json-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+  background: rgba(30, 30, 46, 0.6);
+  border: 1px solid #45475a;
+  border-radius: 12px;
+}
+
+.json-panel textarea,
+.json-panel select {
+  width: 100%;
+  background-color: #1e1e2e;
+  color: white;
+  border: 1px solid rgb(193, 58, 255);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 15px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.json-panel textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.json-panel textarea:hover,
+.json-panel select:hover {
+  border-color: rgb(210, 113, 255);
+}
+
+.json-panel textarea:focus,
+.json-panel select:focus {
+  outline: none;
+  border-color: rgb(210, 113, 255);
+  box-shadow: 0 0 0 3px rgba(193, 58, 255, 0.25);
+}
+
+.json-panel select {
+  width: auto;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.json-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.json-btn {
+  align-self: flex-start;
+  padding: 0.6rem 1.25rem;
+  font-family: inherit;
+  font-size: 16px;
+  background-color: #1e1e2e;
+  color: white;
+  border: 1px solid rgb(193, 58, 255);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.15s ease;
+}
+
+.json-btn:hover {
+  transform: scale(1.05);
+  background-color: #2a2a40;
+  border-color: rgb(210, 113, 255);
+}
+
+.json-btn:active {
+  transform: scale(0.97);
+}
+
+.json-error {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: rgba(243, 139, 168, 0.15);
+  border: 1px solid #f38ba8;
+  border-radius: 6px;
+  color: #f38ba8;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 14px;
+}
+
+.json-error[hidden] {
+  display: none;
+}
+
+.uuid-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.uuid-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.json-panel input[type="number"] {
+  width: 110px;
+  background-color: #1e1e2e;
+  color: white;
+  border: 1px solid rgb(193, 58, 255);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.json-panel input[type="number"]:hover {
+  border-color: rgb(210, 113, 255);
+}
+
+.json-panel input[type="number"]:focus {
+  outline: none;
+  border-color: rgb(210, 113, 255);
+  box-shadow: 0 0 0 3px rgba(193, 58, 255, 0.25);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: rgb(193, 58, 255);
+  cursor: pointer;
+}

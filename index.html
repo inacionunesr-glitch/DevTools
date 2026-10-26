@@ -63,11 +63,73 @@
         <section id="json-formatter" class="tool">
           <h1>JSON Formatter</h1>
           <!-- conteúdo do JSON -->
+
+          <div class="json-panel">
+            <div class="field">
+              <label for="json-input">Input:</label>
+              <textarea
+                id="json-input"
+                placeholder='{"name":"William","age":32}'
+                spellcheck="false"
+              ></textarea>
+            </div>
+
+            <div class="json-actions">
+              <select id="json-indent">
+                <option value="2" selected>2 spaces</option>
+                <option value="4">4 spaces</option>
+                <option value="tab">Tab</option>
+              </select>
+
+              <button class="json-btn" id="json-format-btn">Format</button>
+              <button class="json-btn" id="json-minify-btn">Minify</button>
+              <button class="json-btn" id="json-clear-btn">Clear</button>
+            </div>
+
+            <p class="json-error" id="json-error" hidden></p>
+
+            <div class="field">
+              <label for="json-output">Output:</label>
+              <textarea id="json-output" readonly spellcheck="false"></textarea>
+            </div>
+
+            <button class="json-btn" id="json-copy-btn">Copy</button>
+          </div>
         </section>
 
         <section id="uuid-generator" class="tool">
           <h1>UUID Generator</h1>
           <!-- conteúdo do UUID -->
+           
+          <div class="json-panel">
+            <div class="uuid-options">
+              <div class="field">
+                <label for="uuid-count">How many:</label>
+                <input
+                  type="number"
+                  id="uuid-count"
+                  min="1"
+                  max="50"
+                  value="1"
+                />
+              </div>
+
+              <label class="check">
+                <input type="checkbox" id="uuid-uppercase" /> Uppercase
+              </label>
+
+              <label class="check">
+                <input type="checkbox" id="uuid-hyphens" checked /> Hyphens
+              </label>
+            </div>
+
+            <div class="uuid-actions">
+              <button class="json-btn" id="uuid-generate-btn">Generate</button>
+              <button class="json-btn" id="uuid-copy-btn">Copy all</button>
+            </div>
+
+            <textarea id="uuid-output" readonly spellcheck="false"></textarea>
+          </div>
         </section>
 
         <section id="base64" class="tool">
