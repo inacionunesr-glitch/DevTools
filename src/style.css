@@ -1,6 +1,254 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Noto-Sans, sans-serif;
-    background: linear-gradient(to right, #3b0653, #4d0985);
+  margin: 0;
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  background: linear-gradient(to right, #3b0653, #4d0985);
+  color: white;
+}
+
+/* ---------- layout ---------- */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+#app {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tool {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tool h1 {
+  text-align: center;
+}
+
+/* ---------- sidebar ---------- */
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  padding: 1.5rem 1rem;
+  background: #1e1e2e;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  margin: 0 0 1rem;
+  font-size: 32px;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #45475a;
+  background: rgba(255, 255, 255, 0.04);
+  color: #cdd6f4;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.sidebar a:hover {
+  color: #708adf;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #6c7086;
+}
+
+.sidebar a.active {
+  background: #5b5bd6;
+  color: #fff;
+  border-color: #8b8bf0;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(91, 91, 214, 0.4);
+}
+
+/* ---------- color converter ---------- */
+
+.converter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  font-size: 18px;
+  background: rgba(30, 30, 46, 0.6);
+  border: 1px solid #45475a;
+  border-radius: 12px;
+}
+
+.converter .row {
+  display: flex;
+  gap: 1rem;
+}
+
+.converter .row .field {
+  flex: 1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-size: 16px;
+  color: #cdd6f4;
+}
+
+.converter input,
+.converter select {
+  width: 100%;
+  background-color: #1e1e2e;
+  color: white;
+  border: 1px solid rgb(193, 58, 255);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-size: 18px;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.converter input::placeholder {
+  color: #6c7086;
+}
+
+.converter input:hover,
+.converter select:hover {
+  border-color: rgb(210, 113, 255);
+}
+
+.converter input:focus,
+.converter select:focus {
+  outline: none;
+  border-color: rgb(210, 113, 255);
+  box-shadow: 0 0 0 3px rgba(193, 58, 255, 0.25);
+}
+
+.converter select {
+  cursor: pointer;
+}
+
+.converter select option {
+  background-color: #1e1e2e;
+  color: white;
+}
+
+.convert-color-btn {
+  align-self: center;
+  font-size: 18px;
+  font-family: inherit;
+  background-color: #1e1e2e;
+  color: white;
+  height: 48px;
+  width: 180px;
+  border: 1px solid rgb(193, 58, 255);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.15s ease;
+}
+
+.convert-color-btn:hover {
+  transform: scale(1.08);
+  background-color: #2a2a40;
+  border-color: rgb(210, 113, 255);
+}
+
+.convert-color-btn:active {
+  transform: scale(0.97);
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.result[hidden] {
+  display: none;
+}
+
+.color-preview {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#color-output {
+  flex: 1;
+  margin: 0;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 20px;
+  word-break: break-all;
+}
+
+.result.error .color-preview {
+  display: none;
+}
+
+.result.error #color-output {
+  color: #f38ba8;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.copy-btn {
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 16px;
+  background: #1e1e2e;
+  color: white;
+  border: 1px solid rgb(193, 58, 255);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.15s ease;
+}
+
+.copy-btn:hover {
+  background: #2a2a40;
+  border-color: rgb(210, 113, 255);
+}
+
+.result.error .copy-btn {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .converter .row {
+    flex-direction: column;
+  }
 }

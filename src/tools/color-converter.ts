@@ -1,9 +1,10 @@
-type HEX = `#${string}`
-type RGB = { r: number; g: number; b: number }
-type HSL = { h: number; s: number; l: number}
+export type HEX = `#${string}`
+export type RGB = { r: number; g: number; b: number }
+export type HSL = { h: number; s: number; l: number }
+export type Format = 'hex' | 'rgb' | 'hsl'
 
 // HEX - RGB
-function hex_to_rgb(input: HEX): RGB {
+export function hex_to_rgb(input: HEX): RGB {
     let hex = input.slice(1)
 
     if (hex.length === 3) {
@@ -21,7 +22,7 @@ function hex_to_rgb(input: HEX): RGB {
     }
 }
 
-function rgb_to_hex({ r, g, b }: RGB): HEX {
+export function rgb_to_hex({ r, g, b }: RGB): HEX {
     const toHex = (n: number) => {
         const clamped = Math.min(255, Math.max(0, Math.round(n)))
         return clamped.toString(16).padStart(2, '0')
@@ -31,7 +32,7 @@ function rgb_to_hex({ r, g, b }: RGB): HEX {
 }
 
 // RGB - HSL
-function rgb_to_hsl({ r, g, b }: RGB): HSL {
+export function rgb_to_hsl({ r, g, b }: RGB): HSL {
     r /= 255
     g /= 255
     b /= 255
@@ -64,7 +65,7 @@ function rgb_to_hsl({ r, g, b }: RGB): HSL {
     }
 }
 
-function hsl_to_rgb({ h, s, l }: HSL): RGB {
+export function hsl_to_rgb({ h, s, l }: HSL): RGB {
     h = ((h % 360) + 360) % 360
     s /= 100
     l /= 100
@@ -82,10 +83,41 @@ function hsl_to_rgb({ h, s, l }: HSL): RGB {
 }
 
 // HEX - HSL
-function hex_to_hsl(input: HEX): HSL {
+export function hex_to_hsl(input: HEX): HSL {
     return rgb_to_hsl(hex_to_rgb(input))
 }
 
-function hsl_to_hex(input: HSL): HEX {
+export function hsl_to_hex(input: HSL): HEX {
     return rgb_to_hex(hsl_to_rgb(input))
+}
+
+// General Conversor
+
+function parse(value: string, format: Format): RGB {
+    const v = value.trim()
+
+    if (format === 'hex') {
+        return hex_to_rgb((v.startsWith('#') ? v : `#${v}`) as HEX)
+    }
+
+    const n = v.match(/-?\d+(\.\d+)?/g)?.map(Number)
+    if (!n || n.length !== 3) {
+        throw new Error('Formato inválido. Use 3 números, ex: 255, 136, 0')
+    }
+
+    return format === 'rgb'
+        ? { r: n[0], g: n[1], b: n[2] }
+        : hsl_to_rgb({ h: n[0], s: n[1], l: n[2] })
+}
+
+function stringify(rgb: RGB, format: Format): string {
+    if (format === 'hex') return rgb_to_hex(rgb)
+    if (format === 'rgb') return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
+
+    const { h, s, l } = rgb_to_hsl(rgb)
+    return `hsl(${h}, ${s}%, ${l}%)`
+}
+
+export function convertColor(value: string, from: Format, to: Format): string {
+    return stringify(parse(value, from), to)
 }

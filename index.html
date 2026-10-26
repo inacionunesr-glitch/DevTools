@@ -1,20 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dev Tools</title>
-  <link rel="stylesheet" href="/src/style.css">
-</head>
-<body class="body">
-  <div>
-    <div class="sideBar">
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevTools</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>Menu</h2>
 
+        <ul>
+          <li><a href="#color-converter">Color Converter</a></li>
+          <li><a href="#json-formatter">JSON Formatter</a></li>
+          <li><a href="#uuid-generator">UUID Generator</a></li>
+          <li><a href="#base64">Base 64</a></li>
+        </ul>
+      </aside>
+
+      <main id="app">
+        <section id="color-converter" class="tool">
+          <h1>Color Converter</h1>
+
+          <!-- conteúdo do conversor de cores -->
+
+          <div class="converter">
+            <div class="row">
+              <div class="field">
+                <label for="input-format">Input Format:</label>
+                <select id="input-format">
+                  <option value="hex" selected>HEX</option>
+                  <option value="rgb">RGB</option>
+                  <option value="hsl">HSL</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="output-format">Output Format:</label>
+                <select id="output-format">
+                  <option value="hex">HEX</option>
+                  <option value="rgb" selected>RGB</option>
+                  <option value="hsl">HSL</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="color-input">Color Value:</label>
+              <input id="color-input" placeholder="#ff8800" />
+            </div>
+
+            <button class="convert-color-btn" id="convert-btn">Convert</button>
+            <div class="result" id="result" hidden>
+              <div class="color-preview" id="color-preview"></div>
+              <p id="color-output"></p>
+              <button class="copy-btn" id="copy-btn">Copy</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="json-formatter" class="tool">
+          <h1>JSON Formatter</h1>
+          <!-- conteúdo do JSON -->
+        </section>
+
+        <section id="uuid-generator" class="tool">
+          <h1>UUID Generator</h1>
+          <!-- conteúdo do UUID -->
+        </section>
+
+        <section id="base64" class="tool">
+          <h1>Base 64</h1>
+          <!-- conteúdo do Base 64 -->
+        </section>
+      </main>
     </div>
 
-    <div class="mainPanel">
-      
-    </div>
-  </div>
-</body>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
