@@ -1,6 +1,7 @@
 import { convertColor, type Format } from './tools/color-converter'
 import { formatJson, minifyJson, type Indent } from './tools/json-formmater'
 import { generateUuids } from './tools/uuid-generator'
+import { encodeBase64, decodeBase64 } from './tools/base64'
 
 // SideBar
 const links = document.querySelectorAll<HTMLAnchorElement>('.sidebar a')
@@ -156,4 +157,53 @@ uuidCopyBtn.addEventListener('click', async () => {
     uuidCopyBtn.textContent = 'Failed'
   }
   setTimeout(() => (uuidCopyBtn.textContent = 'Copy all'), 1200)
+})
+
+// Base 64
+const b64Input = document.querySelector<HTMLTextAreaElement>('#b64-input')!
+const b64Output = document.querySelector<HTMLTextAreaElement>('#b64-output')!
+const b64UrlSafe = document.querySelector<HTMLInputElement>('#b64-urlsafe')!
+const b64Error = document.querySelector<HTMLElement>('#b64-error')!
+const b64EncodeBtn = document.querySelector<HTMLButtonElement>('#b64-encode-btn')!
+const b64DecodeBtn = document.querySelector<HTMLButtonElement>('#b64-decode-btn')!
+const b64ClearBtn = document.querySelector<HTMLButtonElement>('#b64-clear-btn')!
+const b64CopyBtn = document.querySelector<HTMLButtonElement>('#b64-copy-btn')!
+
+function runBase64(action: (text: string) => string) {
+  if (!b64Input.value) {
+    b64Output.value = ''
+    b64Error.hidden = true
+    return
+  }
+
+  try {
+    b64Output.value = action(b64Input.value)
+    b64Error.hidden = true
+  } catch (e) {
+    b64Output.value = ''
+    b64Error.textContent = (e as Error).message
+    b64Error.hidden = false
+  }
+}
+
+b64EncodeBtn.addEventListener('click', () =>
+  runBase64(text => encodeBase64(text, b64UrlSafe.checked)),
+)
+
+b64DecodeBtn.addEventListener('click', () => runBase64(decodeBase64))
+
+b64ClearBtn.addEventListener('click', () => {
+  b64Input.value = ''
+  b64Output.value = ''
+  b64Error.hidden = true
+})
+
+b64CopyBtn.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(b64Output.value)
+    b64CopyBtn.textContent = 'Copied!'
+  } catch {
+    b64CopyBtn.textContent = 'Failed'
+  }
+  setTimeout(() => (b64CopyBtn.textContent = 'Copy'), 1200)
 })

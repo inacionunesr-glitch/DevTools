@@ -396,3 +396,7 @@ body {
   accent-color: rgb(193, 58, 255);
   cursor: pointer;
 }
+
+.json-actions .check {
+  padding-bottom: 0;
+}

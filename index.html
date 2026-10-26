@@ -100,7 +100,7 @@
         <section id="uuid-generator" class="tool">
           <h1>UUID Generator</h1>
           <!-- conteúdo do UUID -->
-           
+
           <div class="json-panel">
             <div class="uuid-options">
               <div class="field">
@@ -135,6 +135,36 @@
         <section id="base64" class="tool">
           <h1>Base 64</h1>
           <!-- conteúdo do Base 64 -->
+
+          <div class="json-panel">
+            <div class="field">
+              <label for="b64-input">Input:</label>
+              <textarea
+                id="b64-input"
+                placeholder="Hello, World!"
+                spellcheck="false"
+              ></textarea>
+            </div>
+
+            <div class="json-actions">
+              <button class="json-btn" id="b64-encode-btn">Encode</button>
+              <button class="json-btn" id="b64-decode-btn">Decode</button>
+              <button class="json-btn" id="b64-clear-btn">Clear</button>
+
+              <label class="check">
+                <input type="checkbox" id="b64-urlsafe" /> URL-safe
+              </label>
+            </div>
+
+            <p class="json-error" id="b64-error" hidden></p>
+
+            <div class="field">
+              <label for="b64-output">Output:</label>
+              <textarea id="b64-output" readonly spellcheck="false"></textarea>
+            </div>
+
+            <button class="json-btn" id="b64-copy-btn">Copy</button>
+          </div>
         </section>
       </main>
     </div>
